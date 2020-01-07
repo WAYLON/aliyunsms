@@ -9,7 +9,7 @@ import java.util.Map;
 public class SmsListener {
     @JmsListener(destination = "VALIDATE")
     public void sendSms(Map<String, String> map) {
-        SmsUtil.sendShortMessage(map.get("templateCode"), map.get("mobile"), map.get("params"));
+        SmsUtil.sendShortMessage(map.get("signName"), map.get("templateCode"), map.get("mobile"), map.get("params"));
     }
 
 }

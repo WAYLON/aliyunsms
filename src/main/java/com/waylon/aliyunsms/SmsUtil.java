@@ -13,10 +13,8 @@ import com.aliyuncs.profile.IClientProfile;
  * 阿里云短信工具类
  */
 public class SmsUtil {
-    public static final String VALIDATE_CODE = "***";//发送短信验证码
-    public static final String ORDER_NOTICE = "***";//体检预约成功通知
 
-    public static void sendShortMessage(String templateCode, String phoneNumbers, String params) {
+    public static void sendShortMessage(String signName, String templateCode, String phoneNumbers, String params) {
         // 设置超时时间-可自行调整
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -40,9 +38,9 @@ public class SmsUtil {
         request.setAction("SendSms");
         request.putQueryParameter("RegionId", "cn-hangzhou");
         request.putQueryParameter("PhoneNumbers", phoneNumbers);
-        request.putQueryParameter("SignName", "WAYLON");
+        request.putQueryParameter("SignName", signName);
         request.putQueryParameter("TemplateCode", templateCode);
-        request.putQueryParameter("TemplateParam","{\"code\":\""+params+"\"}");
+        request.putQueryParameter("TemplateParam", "{\"code\":\"" + params + "\"}");
 
         //发送请求
         try {
@@ -51,10 +49,6 @@ public class SmsUtil {
         } catch (ClientException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        sendShortMessage(VALIDATE_CODE, "****", "543211");
     }
 
 }
